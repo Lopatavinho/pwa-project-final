@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PWA Project Final</title>
+
+  <!-- Manifesto da PWA -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0d6efd" />
+
+  <!-- Ícone -->
+  <link rel="icon" href="icons/icon-192x192.png" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f9fc;
+      color: #222;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      color: #0d6efd;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #0d6efd;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0b5ed7;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚀 PWA Project Final</h1>
+  <p>Aplicação rodando com sucesso no Docker!</p>
+  <button onclick="alert('PWA funcionando!')">Testar</button>
+
+  <script>
+    // Registrar o Service Worker (PWA)
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('Service Worker registrado com sucesso!'))
+        .catch(err => console.log('Erro ao registrar Service Worker:', err));
+    }
+  </script>
+</body>
+</html>
