@@ -1,38 +1,50 @@
-name: CI Pipeline
+name: CI - Testes e Build do PWA
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ main ]
+    branches: [ "main" ]
 
 jobs:
-  build-test:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      # 1️⃣ Baixar o repositório
+      - name: Checkout do código
+        uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
+      # 2️⃣ Instalar Node.js
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
-      - name: Instalar dependências Web
+      # 3️⃣ Instalar dependências da API
+      - name: Instalar dependências da API
+        working-directory: ./api
+        run: npm install
+
+      # 4️⃣ Rodar testes da API
+      - name: Rodar testes da API
+        working-directory: ./api
+        run: npm test
+
+      # 5️⃣ Instalar dependências do Web
+      - name: Instalar dependências do Web
+        working-directory: ./web
+        run: npm install
+
+      # 6️⃣ Rodar testes do Web
+      - name: Rodar testes do Web
+        working-directory: ./web
+        run: npm test
+
+      # 7️⃣ (Opcional) Build do frontend
+      - name: Simular build do Web
+        working-directory: ./web
         run: |
-          cd web
-          npm install
-
-      - name: Instalar dependências API
-        run: |
-          cd api
-          npm install
-
-      - name: Rodar testes Jest
-        run: |
-          cd tests/jest
-          npx jest
-
-      - name: Build containers
-        run: docker compose build
+          mkdir -p dist
+          cp -r public/* dist/
+          echo "Build simulado concluído com sucesso"

@@ -9,3 +9,25 @@
 ## Docker Compose
 ```bash
 docker compose up --build
+
+
+---
+
+## ⚙️ Instalação Local
+
+### Pré-requisitos
+- Node.js (v18+)
+- Docker (para rodar containers)
+- npm
+
+### Passos para rodar manualmente (sem Docker)
+```bash
+# Backend
+cd api
+npm install
+npm start
+
+# Frontend
+cd ../web
+npm install
+npx serve public

@@ -1,11 +1,11 @@
 let tarefas = [];
 let idAtual = 1;
 
-const listar = (req, res) => {
+export const listar = (req, res) => {
   res.json(tarefas);
 };
 
-const criar = (req, res) => {
+export const criar = (req, res) => {
   const { titulo, descricao } = req.body;
 
   if (!titulo || !descricao) {
@@ -17,10 +17,10 @@ const criar = (req, res) => {
   res.status(201).json(nova);
 };
 
-const excluir = (req, res) => {
+export const excluir = (req, res) => {
   const id = parseInt(req.params.id);
   tarefas = tarefas.filter(t => t.id !== id);
   res.status(204).send();
 };
 
-module.exports = { listar, criar, excluir };
+export default { listar, criar, excluir };

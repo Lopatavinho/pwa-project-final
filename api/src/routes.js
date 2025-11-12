@@ -1,15 +1,17 @@
-const express = require('express');
-const router = express.Router();
-const tarefaController = require('./controllers/tarefaController');
+import express from 'express';
+import tarefaController from './controllers/tarefaController.js';
 
-// Rota de teste
-router.get('/', (req, res) => {
-  res.json({ message: 'API funcionando!' });
+const router = express.Router();
+
+// Rota de status
+router.get('/status', (req, res) => {
+  res.json({ mensagem: 'API funcionando!' });
 });
+
 
 // Rotas CRUD
 router.get('/tarefas', tarefaController.listar);
 router.post('/tarefas', tarefaController.criar);
 router.delete('/tarefas/:id', tarefaController.excluir);
 
-module.exports = router;
+export default router;
